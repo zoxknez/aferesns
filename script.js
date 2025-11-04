@@ -372,6 +372,8 @@ const translations = {
         allYears: 'Sve godine',
         showing: 'Prikazano:',
         affairs: 'afera',
+        tipTitle: 'Savet:',
+        tipContent: 'Prekopirajte naziv bilo koje afere i pretražite u Google-u za više detalja.',
         
         // Categories
         categories: {
@@ -445,6 +447,8 @@ const translations = {
         allYears: 'All years',
         showing: 'Showing:',
         affairs: 'affairs',
+        tipTitle: 'Tip:',
+        tipContent: 'Copy the name of any affair and search it in Google for more details.',
         
         // Categories
         categories: {
@@ -562,6 +566,10 @@ function updateUILanguage() {
     document.getElementById('searchInput').placeholder = t('searchPlaceholder');
     document.querySelector('#categoryFilter option[value=""]').textContent = t('allCategories');
     document.querySelector('#yearFilter option[value=""]').textContent = t('allYears');
+    
+    // Info tip
+    document.getElementById('tipText').textContent = t('tipTitle');
+    document.getElementById('tipContent').textContent = t('tipContent');
     
     // Popuni kategorije
     populateCategoryFilter();
