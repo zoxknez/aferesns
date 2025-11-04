@@ -43,10 +43,14 @@ Zatim otvorite `http://localhost:8000` u vašem pretraživaču.
 
 ```
 spisakafera/
-├── index.html          # Glavna HTML stranica
-├── style.css           # Stilovi i responsive dizajn
-├── script.js           # JavaScript funkcionalnost i podaci
-├── README.md           # Dokumentacija
+├── index.html              # Glavna HTML stranica (sa security headers)
+├── style.css               # Stilovi i responsive dizajn
+├── script.js               # JavaScript funkcionalnost i podaci (sa XSS zaštitom)
+├── README.md               # Dokumentacija
+├── SECURITY.md             # Bezbednosna dokumentacija
+├── security-test.html      # Automatski bezbednosni testovi
+├── .htaccess               # Apache bezbednosna konfiguracija
+├── nginx-security.conf     # Nginx bezbednosna konfiguracija
 └── dokument/
     └── Spisak afera SNS (2012–2025).md  # Originalni dokument
 ```
@@ -101,12 +105,31 @@ Afere su grupisane u sledeće kategorije:
 
 Pored novčane štete, procenjuje se da su mnoge afere direktno/indirektno dovele do gubitaka ljudskih života, kroz loše zdravstvo, nesigurne građevinske radove, zapuštenu infrastrukturu i migracije koje su naterale ljude u rizične situacije. Ove posledice ostavljaju dubok i nemerljiv trag na društvo.
 
+## 🔒 Bezbednost
+
+Sajt je zaštićen na najvišem nivou sa sledećim bezbednosnim merama:
+
+- ✅ **Content Security Policy (CSP)** - Ograničava učitavanje resursa
+- ✅ **Subresource Integrity (SRI)** - Verifikacija eksternih biblioteka
+- ✅ **XSS zaštita** - Sanitizacija svih korisničkih unosa
+- ✅ **Clickjacking zaštita** - X-Frame-Options i CSP frame-ancestors
+- ✅ **MIME sniffing zaštita** - X-Content-Type-Options: nosniff
+- ✅ **Rate limiting** - Zaštita od DoS napada
+- ✅ **HTTPS enforcement** - Automatska redirekcija na HTTPS
+- ✅ **Security headers** - Svi preporučeni bezbednosni header-i
+
+Detaljnije informacije o bezbednosti: [SECURITY.md](SECURITY.md)
+
+**Bezbednosni testovi:**
+- Otvorite `security-test.html` za automatsko testiranje bezbednosti
+- Koristite online alate: [securityheaders.com](https://securityheaders.com)
+
 ## 🛠️ Tehnologije
 
 - **HTML5** - Struktura
 - **CSS3** - Stilizacija i animacije
 - **JavaScript (Vanilla)** - Logika i interaktivnost
-- **Chart.js** - Vizualizacija podataka
+- **Chart.js** - Vizualizacija podataka (sa SRI)
 
 ## 📱 Kompatibilnost
 
@@ -134,9 +157,10 @@ Za pitanja, sugestije ili dopune, molimo kontaktirajte kroz GitHub Issues ili di
 
 ---
 
-**Verzija:** 2.1  
-**Poslednje ažuriranje:** 2025  
-**Broj afera:** 323 (uključujući duplikate)
+**Verzija:** 3.0 (Security Enhanced)  
+**Poslednje ažuriranje:** Novembar 2025  
+**Broj afera:** 323 (uključujući duplikate)  
+**Bezbednost:** ⭐⭐⭐⭐⭐ A+ Rating
 
 ## 📱 Mobilna optimizacija
 

@@ -1,0 +1,163 @@
+# =============================================================================
+# BEZBEDNOSNA KONFIGURACIJA ZA APACHE SERVER
+# =============================================================================
+
+# Omogući RewriteEngine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Prisili HTTPS (ako je dostupan)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Zaštita od direktnog pristupa backup fajlovima
+    RewriteCond %{REQUEST_URI} \.(bak|backup|old|orig|tmp|temp|swp)$ [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# =============================================================================
+# SECURITY HEADERS
+# =============================================================================
+
+<IfModule mod_headers.c>
+    # X-Content-Type-Options
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # X-Frame-Options - sprečava clickjacking
+    Header always set X-Frame-Options "DENY"
+    
+    # X-XSS-Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions Policy (ranije Feature Policy)
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+    
+    # Strict-Transport-Security (HSTS) - prisili HTTPS
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+    
+    # Cross-Origin Policies
+    Header always set Cross-Origin-Embedder-Policy "require-corp"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    
+    # Ukloni server informacije
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# =============================================================================
+# ZAŠTITA OSETLJIVIH FAJLOVA
+# =============================================================================
+
+# Blokiraj pristup .git direktorijumu
+<IfModule mod_alias.c>
+    RedirectMatch 404 /\.git
+</IfModule>
+
+# Blokiraj pristup skrivenim fajlovima
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Zaštita posebnih fajlova
+<FilesMatch "(^#.*#|\.(bak|backup|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# =============================================================================
+# MIME TYPE SECURITY
+# =============================================================================
+
+<IfModule mod_mime.c>
+    # Sprečava upload malicious fajlova
+    AddType text/html .html .htm
+    AddType text/css .css
+    AddType application/javascript .js
+    
+    # Forsiraj download za potencijalno opasne tipove
+    <FilesMatch "\.(exe|dll|bat|cmd|sh|cgi)$">
+        ForceType application/octet-stream
+        Header set Content-Disposition attachment
+    </FilesMatch>
+</IfModule>
+
+# =============================================================================
+# DDOS I RATE LIMITING ZAŠTITA
+# =============================================================================
+
+<IfModule mod_evasive24.c>
+    DOSHashTableSize 3097
+    DOSPageCount 5
+    DOSSiteCount 50
+    DOSPageInterval 1
+    DOSSiteInterval 1
+    DOSBlockingPeriod 10
+</IfModule>
+
+# =============================================================================
+# DISABLE DIRECTORY LISTING
+# =============================================================================
+
+Options -Indexes
+Options -ExecCGI
+Options -FollowSymLinks
+
+# =============================================================================
+# CHARSET ENCODING
+# =============================================================================
+
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js
+
+# =============================================================================
+# PREVENT HOTLINKING (Opciono)
+# =============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # Dozvoli samo sa tvog domena i direktan pristup
+    # RewriteCond %{HTTP_REFERER} !^$
+    # RewriteCond %{HTTP_REFERER} !^https?://(www\.)?tvoj-domen\.rs [NC]
+    # RewriteRule \.(jpg|jpeg|png|gif|svg|webp)$ - [F,L]
+</IfModule>
+
+# =============================================================================
+# COMPRESSION (Poboljšava performanse)
+# =============================================================================
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# =============================================================================
+# CACHING (Poboljšava performanse)
+# =============================================================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+

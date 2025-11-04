@@ -327,6 +327,31 @@ const affairs = [
 
 let filteredAffairs = [...affairs];
 
+// Bezbednosne funkcije - zaštita od XSS napada
+function escapeHtml(text) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+        '/': '&#x2F;'
+    };
+    return String(text).replace(/[&<>"'/]/g, function(m) { return map[m]; });
+}
+
+function sanitizeInput(input) {
+    // Uklanja potencijalno opasne karaktere iz korisničkog unosa
+    return input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+                .replace(/javascript:/gi, '')
+                .replace(/on\w+\s*=/gi, '');
+}
+
+// Rate limiting za pretragu - sprečava preopterećenje
+let searchTimeout = null;
+const SEARCH_DELAY = 300; // ms
+
 // Inicijalizacija
 document.addEventListener('DOMContentLoaded', function() {
     createDamageChart();
@@ -334,10 +359,19 @@ document.addEventListener('DOMContentLoaded', function() {
     renderAffairs(affairs);
     updateAffairCount(affairs.length);
     
-    // Event listeners
-    document.getElementById('searchInput').addEventListener('input', filterAffairs);
+    // Event listeners sa debouncing za pretragu
+    document.getElementById('searchInput').addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterAffairs, SEARCH_DELAY);
+    });
     document.getElementById('categoryFilter').addEventListener('change', filterAffairs);
     document.getElementById('yearFilter').addEventListener('change', filterAffairs);
+    
+    // Spreči slanje formi ako postoje (dodatna zaštita)
+    document.addEventListener('submit', function(e) {
+        e.preventDefault();
+        return false;
+    });
 });
 
 // Kreiranje grafikona
@@ -418,19 +452,27 @@ function renderAffairs(affairsToRender) {
         const card = document.createElement('div');
         card.className = `affair-card ${affair.isDuplicate ? 'duplicate' : ''}`;
         
-        const linkButton = `<a href="#" class="affair-link no-link" onclick="return false;">📰 Uskoro</a>`;
+        // Sanitizuj sve podatke pre prikazivanja
+        const safeTitle = escapeHtml(affair.title);
+        const safeYear = escapeHtml(affair.year);
+        const safeCategory = escapeHtml(affair.category);
+        const safeId = parseInt(affair.id); // Osiguraj da je ID broj
+        
+        const linkButton = affair.link && affair.link.trim() !== ''
+            ? `<a href="${escapeHtml(affair.link)}" class="affair-link" target="_blank" rel="noopener noreferrer">📰 Opširnije</a>`
+            : `<span class="affair-link no-link">📰 Uskoro</span>`;
         
         const duplicateBadge = affair.isDuplicate 
             ? '<span class="duplicate-badge">⚠️ DUPLIKAT</span>' 
             : '';
         
         card.innerHTML = `
-            <div class="affair-number">${affair.id}</div>
-            <h3 class="affair-title">${affair.title}</h3>
-            <span class="affair-year">📅 ${affair.year}</span>
+            <div class="affair-number">${safeId}</div>
+            <h3 class="affair-title">${safeTitle}</h3>
+            <span class="affair-year">📅 ${safeYear}</span>
             ${duplicateBadge}
             <div>
-                <span class="affair-category">${affair.category}</span>
+                <span class="affair-category">${safeCategory}</span>
             </div>
             ${linkButton}
         `;
@@ -439,14 +481,25 @@ function renderAffairs(affairsToRender) {
     });
 }
 
-// Filtriranje afera
+// Filtriranje afera sa sanitizacijom unosa
 function filterAffairs() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const searchInput = document.getElementById('searchInput');
+    const rawSearchTerm = searchInput.value;
+    
+    // Sanitizuj unos pre procesiranja
+    const sanitizedSearchTerm = sanitizeInput(rawSearchTerm).toLowerCase();
+    
+    // Ograniči dužinu pretrage (zaštita od DoS)
+    if (sanitizedSearchTerm.length > 100) {
+        searchInput.value = sanitizedSearchTerm.substring(0, 100);
+        return;
+    }
+    
     const categoryFilter = document.getElementById('categoryFilter').value;
     const yearFilter = document.getElementById('yearFilter').value;
     
     filteredAffairs = affairs.filter(affair => {
-        const matchesSearch = affair.title.toLowerCase().includes(searchTerm);
+        const matchesSearch = affair.title.toLowerCase().includes(sanitizedSearchTerm);
         const matchesCategory = !categoryFilter || affair.category === categoryFilter;
         const matchesYear = !yearFilter || affair.year.includes(yearFilter);
         

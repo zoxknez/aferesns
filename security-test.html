@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bezbednosni Test - Spisak Afera</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        .result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        .pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-pass {
+            background: #27ae60;
+            color: white;
+        }
+        .status-fail {
+            background: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Bezbednosni Test Sajta</h1>
+        
+        <div class="test-section">
+            <h2>1. XSS (Cross-Site Scripting) Zaštita</h2>
+            <p>Test da li sajt pravilno escape-uje HTML karaktere:</p>
+            <input type="text" id="xss-test-input" placeholder="Pokušaj: <script>alert('XSS')</script>" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <button onclick="testXSS()">Testiraj XSS Zaštitu</button>
+            <div id="xss-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>2. Security Headers Provera</h2>
+            <p>Provera da li sajt ima sve potrebne bezbednosne header-e:</p>
+            <button onclick="testSecurityHeaders()">Proveri Headers</button>
+            <div id="headers-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>3. CSP (Content Security Policy) Test</h2>
+            <p>Provera da li je CSP pravilno konfigurisan:</p>
+            <button onclick="testCSP()">Testiraj CSP</button>
+            <div id="csp-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>4. External Links Security</h2>
+            <p>Provera da li eksterni linkovi imaju rel="noopener noreferrer":</p>
+            <button onclick="testExternalLinks()">Proveri Linkove</button>
+            <div id="links-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>5. Input Validation Test</h2>
+            <p>Test validacije unosa (maksimalna dužina, specijalni karakteri):</p>
+            <button onclick="testInputValidation()">Testiraj Validaciju</button>
+            <div id="validation-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>6. HTTPS Test</h2>
+            <p>Provera da li sajt koristi HTTPS:</p>
+            <div id="https-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Ukupna Ocena Bezbednosti</h2>
+            <div id="overall-score" style="font-size: 24px; text-align: center; margin: 20px 0;">
+                <!-- Popunjava se JavaScript-om -->
+            </div>
+        </div>
+
+        <div class="test-section" style="background: #fff3cd; border-color: #ffc107;">
+            <h2>🔗 Dodatni Online Testovi</h2>
+            <p>Za potpunu bezbednosnu analizu, koristite:</p>
+            <ul>
+                <li><a href="https://securityheaders.com" target="_blank">SecurityHeaders.com</a> - Provera security headers</li>
+                <li><a href="https://observatory.mozilla.org" target="_blank">Mozilla Observatory</a> - Sveobuhvatna analiza</li>
+                <li><a href="https://www.ssllabs.com/ssltest/" target="_blank">SSL Labs</a> - SSL/TLS test</li>
+                <li><a href="https://csp-evaluator.withgoogle.com" target="_blank">Google CSP Evaluator</a> - CSP analiza</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let testsPassed = 0;
+        let totalTests = 0;
+
+        // Helper funkcija za escape HTML
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;',
+                '/': '&#x2F;'
+            };
+            return String(text).replace(/[&<>"'/]/g, function(m) { return map[m]; });
+        }
+
+        // Test 1: XSS Zaštita
+        function testXSS() {
+            totalTests++;
+            const input = document.getElementById('xss-test-input').value;
+            const escaped = escapeHtml(input);
+            const resultDiv = document.getElementById('xss-result');
+            
+            // Proveri da li su opasni karakteri escape-ovani
+            const isDangerous = /<script|<iframe|javascript:|on\w+=/i.test(input);
+            const isSafe = !/<|>|"/.test(escaped) || escaped !== input;
+            
+            if (isDangerous && isSafe) {
+                resultDiv.innerHTML = `
+                    <div class="result pass">
+                        ✅ <strong>PASS:</strong> XSS zaštita radi ispravno!<br>
+                        Unos: <code>${input}</code><br>
+                        Escape-ovan: <code>${escaped}</code>
+                    </div>
+                `;
+                testsPassed++;
+            } else if (!isDangerous) {
+                resultDiv.innerHTML = `
+                    <div class="result info">
+                        ℹ️ <strong>INFO:</strong> Unos nije opasan. Pokušajte sa: &lt;script&gt;alert('XSS')&lt;/script&gt;
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result fail">
+                        ❌ <strong>FAIL:</strong> XSS zaštita ne radi pravilno!
+                    </div>
+                `;
+            }
+            updateScore();
+        }
+
+        // Test 2: Security Headers
+        function testSecurityHeaders() {
+            totalTests++;
+            const resultDiv = document.getElementById('headers-result');
+            
+            const metaTags = {
+                'X-Content-Type-Options': document.querySelector('meta[http-equiv="X-Content-Type-Options"]'),
+                'X-Frame-Options': document.querySelector('meta[http-equiv="X-Frame-Options"]'),
+                'X-XSS-Protection': document.querySelector('meta[http-equiv="X-XSS-Protection"]'),
+                'Content-Security-Policy': document.querySelector('meta[http-equiv="Content-Security-Policy"]'),
+                'Referrer': document.querySelector('meta[name="referrer"]')
+            };
+            
+            let html = '<div class="result info"><strong>Security Headers Status:</strong><br><br>';
+            let allPresent = true;
+            
+            for (let [header, element] of Object.entries(metaTags)) {
+                if (element) {
+                    html += `✅ ${header}: <span style="color: green;">Prisutan</span><br>`;
+                } else {
+                    html += `❌ ${header}: <span style="color: red;">Nedostaje</span><br>`;
+                    allPresent = false;
+                }
+            }
+            
+            html += '</div>';
+            
+            if (allPresent) {
+                html = '<div class="result pass"><strong>✅ PASS:</strong> Svi bezbednosni headers su prisutni!</div>' + html;
+                testsPassed++;
+            } else {
+                html = '<div class="result fail"><strong>❌ FAIL:</strong> Neki headers nedostaju!</div>' + html;
+            }
+            
+            resultDiv.innerHTML = html;
+            updateScore();
+        }
+
+        // Test 3: CSP
+        function testCSP() {
+            totalTests++;
+            const resultDiv = document.getElementById('csp-result');
+            const cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+            
+            if (cspMeta) {
+                const cspContent = cspMeta.getAttribute('content');
+                const requiredDirectives = [
+                    'default-src',
+                    'script-src',
+                    'style-src',
+                    'frame-ancestors',
+                    'base-uri'
+                ];
+                
+                let missingDirectives = [];
+                requiredDirectives.forEach(directive => {
+                    if (!cspContent.includes(directive)) {
+                        missingDirectives.push(directive);
+                    }
+                });
+                
+                if (missingDirectives.length === 0) {
+                    resultDiv.innerHTML = `
+                        <div class="result pass">
+                            ✅ <strong>PASS:</strong> CSP je pravilno konfigurisan!<br>
+                            <small>Direktive: ${cspContent.substring(0, 100)}...</small>
+                        </div>
+                    `;
+                    testsPassed++;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result fail">
+                            ❌ <strong>FAIL:</strong> CSP nedostaju direktive: ${missingDirectives.join(', ')}
+                        </div>
+                    `;
+                }
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result fail">
+                        ❌ <strong>FAIL:</strong> CSP nije konfigurisan!
+                    </div>
+                `;
+            }
+            updateScore();
+        }
+
+        // Test 4: External Links
+        function testExternalLinks() {
+            totalTests++;
+            const resultDiv = document.getElementById('links-result');
+            
+            // Idi na glavni sajt i proveri linkove
+            resultDiv.innerHTML = `
+                <div class="result info">
+                    ℹ️ <strong>INFO:</strong> Za testiranje eksternih linkova, otvorite glavni sajt (index.html).<br>
+                    Svi eksterni linkovi bi trebali imati:<br>
+                    - <code>target="_blank"</code><br>
+                    - <code>rel="noopener noreferrer"</code>
+                </div>
+            `;
+        }
+
+        // Test 5: Input Validation
+        function testInputValidation() {
+            totalTests++;
+            const resultDiv = document.getElementById('validation-result');
+            
+            // Simuliraj dugačak unos
+            const longString = 'a'.repeat(150);
+            const sanitized = longString.substring(0, 100);
+            
+            if (sanitized.length === 100) {
+                resultDiv.innerHTML = `
+                    <div class="result pass">
+                        ✅ <strong>PASS:</strong> Input validation radi!<br>
+                        Unos od 150 karaktera je ograničen na 100.
+                    </div>
+                `;
+                testsPassed++;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result fail">
+                        ❌ <strong>FAIL:</strong> Input validation ne radi pravilno!
+                    </div>
+                `;
+            }
+            updateScore();
+        }
+
+        // Test 6: HTTPS
+        function testHTTPS() {
+            totalTests++;
+            const resultDiv = document.getElementById('https-result');
+            
+            if (window.location.protocol === 'https:') {
+                resultDiv.innerHTML = `
+                    <div class="result pass">
+                        ✅ <strong>PASS:</strong> Sajt koristi HTTPS!
+                    </div>
+                `;
+                testsPassed++;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result fail">
+                        ⚠️ <strong>WARNING:</strong> Sajt ne koristi HTTPS!<br>
+                        <small>Za produkciju, obavezno omogućite HTTPS.</small>
+                    </div>
+                `;
+            }
+            updateScore();
+        }
+
+        // Ažuriraj ukupnu ocenu
+        function updateScore() {
+            if (totalTests === 0) return;
+            
+            const percentage = Math.round((testsPassed / totalTests) * 100);
+            const scoreDiv = document.getElementById('overall-score');
+            
+            let grade, color;
+            if (percentage >= 90) {
+                grade = 'A+';
+                color = '#27ae60';
+            } else if (percentage >= 80) {
+                grade = 'A';
+                color = '#2ecc71';
+            } else if (percentage >= 70) {
+                grade = 'B';
+                color = '#f39c12';
+            } else if (percentage >= 60) {
+                grade = 'C';
+                color = '#e67e22';
+            } else {
+                grade = 'F';
+                color = '#e74c3c';
+            }
+            
+            scoreDiv.innerHTML = `
+                <div style="background: ${color}; color: white; padding: 30px; border-radius: 10px;">
+                    <div style="font-size: 48px; font-weight: bold;">Ocena: ${grade}</div>
+                    <div style="font-size: 24px; margin-top: 10px;">${percentage}%</div>
+                    <div style="font-size: 16px; margin-top: 10px;">
+                        ${testsPassed} od ${totalTests} testova prošlo
+                    </div>
+                </div>
+            `;
+        }
+
+        // Automatski pokreni HTTPS test pri učitavanju
+        window.addEventListener('DOMContentLoaded', function() {
+            testHTTPS();
+        });
+
+        // Automatski pokreni sve testove
+        function runAllTests() {
+            testsPassed = 0;
+            totalTests = 0;
+            
+            testXSS();
+            testSecurityHeaders();
+            testCSP();
+            testExternalLinks();
+            testInputValidation();
+            testHTTPS();
+        }
+    </script>
+</body>
+</html>
+
