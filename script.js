@@ -375,6 +375,10 @@ const translations = {
         tipTitle: 'Savet:',
         tipContent: 'Prekopirajte naziv bilo koje afere i pretražite u Google-u za više detalja.',
         
+        // Export
+        exportCSV: 'CSV Export',
+        exportJSON: 'JSON Export',
+        
         // Categories
         categories: {
             'Urbanizam': 'Urbanizam',
@@ -449,6 +453,10 @@ const translations = {
         affairs: 'affairs',
         tipTitle: 'Tip:',
         tipContent: 'Copy the name of any affair and search it in Google for more details.',
+        
+        // Export
+        exportCSV: 'CSV Export',
+        exportJSON: 'JSON Export',
         
         // Categories
         categories: {
@@ -571,6 +579,10 @@ function updateUILanguage() {
     document.getElementById('tipText').textContent = t('tipTitle');
     document.getElementById('tipContent').textContent = t('tipContent');
     
+    // Export dugmad
+    document.getElementById('exportCSVText').textContent = t('exportCSV');
+    document.getElementById('exportJSONText').textContent = t('exportJSON');
+    
     // Popuni kategorije
     populateCategoryFilter();
     
@@ -620,6 +632,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners za jezike
     document.getElementById('lang-sr').addEventListener('click', () => changeLanguage('sr'));
     document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
+    
+    // Event listeners za export
+    document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+    document.getElementById('exportJSON').addEventListener('click', exportToJSON);
     
     // Event listeners sa debouncing za pretragu
     document.getElementById('searchInput').addEventListener('input', function() {
@@ -753,6 +769,10 @@ function filterAffairs() {
     const searchInput = document.getElementById('searchInput');
     const rawSearchTerm = searchInput.value;
     
+    // Sačuvaj da li search ima fokus
+    const searchHasFocus = document.activeElement === searchInput;
+    const cursorPosition = searchInput.selectionStart;
+    
     // Sanitizuj unos pre procesiranja
     const sanitizedSearchTerm = sanitizeInput(rawSearchTerm).toLowerCase();
     
@@ -766,7 +786,8 @@ function filterAffairs() {
     const yearFilter = document.getElementById('yearFilter').value;
     
     filteredAffairs = affairs.filter(affair => {
-        const matchesSearch = affair.title.toLowerCase().includes(sanitizedSearchTerm);
+        const affairTitle = (currentLanguage === 'en' && affair.titleEn) ? affair.titleEn : affair.title;
+        const matchesSearch = affairTitle.toLowerCase().includes(sanitizedSearchTerm);
         const matchesCategory = !categoryFilter || affair.category === categoryFilter;
         const matchesYear = !yearFilter || affair.year.includes(yearFilter);
         
@@ -775,10 +796,83 @@ function filterAffairs() {
     
     renderAffairs(filteredAffairs);
     updateAffairCount(filteredAffairs.length);
+    
+    // Vrati fokus i poziciju kursora ako je search imao fokus
+    if (searchHasFocus) {
+        searchInput.focus();
+        searchInput.setSelectionRange(cursorPosition, cursorPosition);
+    }
 }
 
 // Ažuriranje brojača
 function updateAffairCount(count) {
     document.getElementById('affairCount').innerHTML = `${t('showing')} <strong>${count}</strong> ${t('affairs')}`;
+}
+
+// ============================================================================
+// EXPORT FUNKCIONALNOST - CSV i JSON
+// ============================================================================
+
+// Export u CSV format
+function exportToCSV() {
+    const dataToExport = filteredAffairs.length > 0 ? filteredAffairs : affairs;
+    
+    // CSV Header
+    let csv = 'ID,Title (SR),Title (EN),Year,Category,Link,Duplicate\n';
+    
+    // CSV Rows
+    dataToExport.forEach(affair => {
+        const titleSR = `"${affair.title.replace(/"/g, '""')}"`;
+        const titleEN = affair.titleEn ? `"${affair.titleEn.replace(/"/g, '""')}"` : '""';
+        const year = affair.year;
+        const category = affair.category;
+        const link = affair.link || '';
+        const duplicate = affair.isDuplicate ? 'Yes' : 'No';
+        
+        csv += `${affair.id},${titleSR},${titleEN},${year},${category},${link},${duplicate}\n`;
+    });
+    
+    // Download CSV fajla
+    downloadFile(csv, 'spisak-afera-sns.csv', 'text/csv');
+}
+
+// Export u JSON format
+function exportToJSON() {
+    const dataToExport = filteredAffairs.length > 0 ? filteredAffairs : affairs;
+    
+    // Kreiraj JSON
+    const jsonData = {
+        exportDate: new Date().toISOString(),
+        language: currentLanguage,
+        totalAffairs: dataToExport.length,
+        affairs: dataToExport.map(affair => ({
+            id: affair.id,
+            titleSR: affair.title,
+            titleEN: affair.titleEn || '',
+            year: affair.year,
+            category: affair.category,
+            link: affair.link || '',
+            isDuplicate: affair.isDuplicate
+        }))
+    };
+    
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    
+    // Download JSON fajla
+    downloadFile(jsonString, 'spisak-afera-sns.json', 'application/json');
+}
+
+// Helper funkcija za download fajla
+function downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 }
 
