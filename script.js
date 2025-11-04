@@ -458,9 +458,8 @@ function renderAffairs(affairsToRender) {
         const safeCategory = escapeHtml(affair.category);
         const safeId = parseInt(affair.id); // Osiguraj da je ID broj
         
-        const linkButton = affair.link && affair.link.trim() !== ''
-            ? `<a href="${escapeHtml(affair.link)}" class="affair-link" target="_blank" rel="noopener noreferrer">📰 Opširnije</a>`
-            : `<span class="affair-link no-link">📰 Uskoro</span>`;
+        // Svi linkovi prikazuju "Uskoro" - linkovi će biti ručno dodati kasnije
+        const linkButton = `<span class="affair-link no-link">📰 Uskoro</span>`;
         
         const duplicateBadge = affair.isDuplicate 
             ? '<span class="duplicate-badge">⚠️ DUPLIKAT</span>' 
