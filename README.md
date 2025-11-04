@@ -7,10 +7,12 @@ Moderna web aplikacija koja prikazuje preko 310 zabeleženih ili prijavljenih af
 - **Vizuelni prikaz štete** - Interaktivni grafikon koji prikazuje procenjenu štetu po kategorijama (do 6 milijardi €)
 - **Pretraga** - Pretražite afere po ključnim rečima
 - **Filteri** - Filtrirajte po kategoriji i godini
-- **Linkovi ka člancima** - Direktne veze ka novinarskim člancima za najveće afere
+- **Linkovi ka člancima** - Direktne veze ka novinarskim člancima (uskoro)
 - **Detekcija duplikata** - Označene duplirane afere (npr. Aflatoksin u mleku - stavke 30 i 31)
-- **Responsive dizajn** - Prilagođeno za sve uređaje (desktop, tablet, mobilni)
-- **Moderna UI** - Elegantna i intuitivna korisničko iskustvo
+- **Potpuno responsive dizajn** - Savršeno optimizovano za sve uređaje (desktop, tablet, mobilni)
+- **Touch-friendly** - Veliki dodirni ciljevi (min 44px) i optimizovana mobilna navigacija
+- **Moderna UI** - Elegantno i intuitivno korisničko iskustvo
+- **Pristupačnost** - Pravilna semantika i fokus indikatori
 
 ## 🚀 Kako pokrenuti
 
@@ -66,28 +68,9 @@ Tokom analize podataka, pronađeni su sledeći duplikati:
 
 **UKUPNO**: Maksimalno 6 milijardi € procenjene štete
 
-## 📰 Dodati linkovi ka člancima
+## 📰 Linkovi ka člancima
 
-Dodati su linkovi ka javno dostupnim novinarskim člancima za sledeće afere:
-
-- Pad nadstrešnice (BBC)
-- Savamala (BBC)
-- Beograd na vodi (BBC)
-- Pad helikoptera (RTS)
-- Krušik (Insajder)
-- Jovanjica (BBC)
-- Respiratori (BBC)
-- Linglong (BBC)
-- Rio Tinto (BBC)
-- Bela tehnika (BBC)
-- Telekom (CINS)
-- Plagijat Siniše Malog (BBC)
-- RTB Bor/Zijin (BBC)
-- Pandora Papers (BBC)
-- Gašenje N1 i Nova S (BBC)
-- Napad na studente (BBC)
-- Tetka iz Kanade (BBC)
-- I mnogi drugi...
+Linkovi ka novinarskim člancima biće dodati uskoro. Trenutno sve afere prikazuju "📰 Uskoro" dok se ne prikupe odgovarajući izvori.
 
 ## 🎨 Kategorije afera
 
@@ -151,7 +134,17 @@ Za pitanja, sugestije ili dopune, molimo kontaktirajte kroz GitHub Issues ili di
 
 ---
 
-**Verzija:** 1.0  
+**Verzija:** 2.0  
 **Poslednje ažuriranje:** 2025  
-**Broj afera:** 312 (uključujući duplikate)
+**Broj afera:** 313 (uključujući duplikate)
+
+## 📱 Mobilna optimizacija
+
+Aplikacija je potpuno optimizovana za mobilne uređaje sa:
+- Responsivnim layoutom koji se prilagođava veličini ekrana
+- Velikim touch targetima (minimum 44px)
+- Optimizovanim font veličinama (16px+) za sprečavanje zoom-a na iOS
+- Horizontalnim scrollovanjem za kategorije štete
+- Prilagođenim razmacima i paddingom za lakše korišćenje na mobilnom
+- Touch-friendly kontrolama i dugmićima
 

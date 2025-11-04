@@ -337,11 +337,11 @@ function createDamageChart() {
         type: 'doughnut',
         data: {
             labels: [
-                'Javne nabavke (2-3 mlrd €)',
-                'Zemlje i koncesije (1 mlrd €)',
-                'Građevinske afere (0.5-1 mlrd €)',
-                'Lokalne afere (0.3-0.5 mlrd €)',
-                'Predizborni pokloni (0.2-0.3 mlrd €)'
+                'Javne nabavke (2–3 mlrd €)',
+                'Zemljište i koncesije (1 mlrd €)',
+                'Građevinske afere (0,5–1 mlrd €)',
+                'Lokalne afere (0,3–0,5 mlrd €)',
+                'Predizborni pokloni (0,2–0,3 mlrd €)'
             ],
             datasets: [{
                 data: [2.5, 1, 0.75, 0.4, 0.25],
@@ -400,7 +400,7 @@ function renderAffairs(affairsToRender) {
     affairsList.innerHTML = '';
     
     if (affairsToRender.length === 0) {
-        affairsList.innerHTML = '<div class="no-results">😔 Nema rezultata koji odgovaraju kriterijumima pretrage.</div>';
+        affairsList.innerHTML = '<div class="no-results">😔 Nije pronađena nijedna afera koja odgovara vašim kriterijumima pretrage.</div>';
         return;
     }
     
@@ -449,6 +449,14 @@ function filterAffairs() {
 
 // Ažuriranje brojača
 function updateAffairCount(count) {
-    document.getElementById('affairCount').innerHTML = `Ukupno: <strong>${count}</strong> ${count === 1 ? 'afera' : 'afera'}`;
+    let text = 'afera';
+    if (count === 1) {
+        text = 'afera';
+    } else if (count >= 2 && count <= 4) {
+        text = 'afere';
+    } else {
+        text = 'afera';
+    }
+    document.getElementById('affairCount').innerHTML = `Prikazano: <strong>${count}</strong> ${text}`;
 }
 

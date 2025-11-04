@@ -47,6 +47,7 @@ header h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
 }
 
 .subtitle {
@@ -174,6 +175,7 @@ header h1 {
 .search-box input:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .filter-box {
@@ -194,6 +196,7 @@ header h1 {
 .filter-box select:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .stats {
@@ -285,17 +288,29 @@ header h1 {
 .affair-link {
     display: inline-block;
     margin-top: 15px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: var(--success-color);
     color: white;
     text-decoration: none;
     border-radius: 25px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
     font-weight: 500;
+    min-height: 44px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .affair-link:hover {
     background: #229954;
+    transform: translateY(-2px);
+}
+
+.affair-link:active {
+    transform: translateY(0);
 }
 
 .affair-link.no-link {
@@ -330,30 +345,148 @@ footer {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        padding: 25px 20px;
+    }
+
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.6em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .warning-box {
+        padding: 15px;
+        font-size: 0.95em;
+    }
+
+    .damage-overview {
+        padding: 25px 20px;
+    }
+
+    .damage-overview h2 {
+        font-size: 1.5em;
+    }
+
+    .chart-container {
+        padding: 15px;
+    }
+
+    .damage-card {
+        min-width: 100%;
+        padding: 20px;
+    }
+
+    .damage-card h3 {
+        font-size: 1em;
+    }
+
+    .damage-amount {
+        font-size: 1.1em;
     }
 
     .controls {
+        padding: 20px;
         flex-direction: column;
         align-items: stretch;
+        gap: 15px;
+    }
+
+    .search-box input,
+    .filter-box select {
+        padding: 12px 15px;
+        font-size: 16px; /* Prevents zoom on iOS */
     }
 
     .filter-box {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .stats {
+        text-align: center;
+        font-size: 1em;
     }
 
     .affairs-list {
         grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .affair-card {
         padding: 20px;
+    }
+
+    .affair-title {
+        font-size: 1.15em;
+        padding-right: 45px;
+    }
+
+    .affair-number {
+        width: 35px;
+        height: 35px;
+        font-size: 0.85em;
+        top: 12px;
+        right: 12px;
+    }
+
+    .affair-year,
+    .affair-category,
+    .duplicate-badge {
+        font-size: 0.8em;
+        padding: 4px 10px;
+    }
+
+    .affair-link {
+        padding: 12px 20px;
+        font-size: 0.95em;
+        display: block;
+        text-align: center;
+        margin-top: 12px;
     }
 
     .damage-categories {
         flex-direction: column;
     }
     
-    .damage-card {
-        min-width: 100%;
+    .damage-icon {
+        font-size: 2.5em;
+    }
+
+    footer {
+        padding: 20px;
+        font-size: 0.9em;
+    }
+
+    .no-results {
+        padding: 40px 20px;
+        font-size: 1.1em;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    .damage-overview h2 {
+        font-size: 1.3em;
+    }
+
+    .affair-title {
+        font-size: 1.05em;
+    }
+
+    .stats strong {
+        font-size: 1.2em;
     }
 }
 
