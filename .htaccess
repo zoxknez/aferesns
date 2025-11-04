@@ -39,7 +39,7 @@
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     
     # Content Security Policy
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cdn.jsdelivr.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
     
     # Cross-Origin Policies
     Header always set Cross-Origin-Embedder-Policy "require-corp"
