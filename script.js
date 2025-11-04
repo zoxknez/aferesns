@@ -328,6 +328,177 @@ const affairs = [
 
 let filteredAffairs = [...affairs];
 
+// ============================================================================
+// INTERNATIONALIZATION (i18n) - Srpski i Engleski
+// ============================================================================
+
+const translations = {
+    sr: {
+        // Header
+        title: 'Spisak afera SNS (2012–2025)',
+        subtitle: 'Preko 324 zabeležene ili prijavljene afere i skandala',
+        warningTitle: '⚠️ Napomena o ljudskim životima:',
+        warningText: 'Pored novčane štete, procenjuje se da su mnoge afere direktno i indirektno dovele do gubitaka ljudskih života kroz loše zdravstvo, nesigurne građevinske radove, zapuštenu infrastrukturu i migracije koje su naterale ljude u rizične situacije.',
+        
+        // Damage Overview
+        damageTitle: '💰 Vizuelni prikaz procenjene štete (maksimalno 6 milijardi €)',
+        damageCategories: {
+            construction: 'Velike građevinske afere',
+            procurement: 'Javne nabavke',
+            local: 'Lokalne "mikro" afere',
+            land: 'Zemljište i koncesije',
+            electoral: 'Predizborni pokloni/glasovi'
+        },
+        damageAmounts: {
+            construction: '0,5 – 1,0 milijardi €',
+            procurement: '2 – 3 milijarde €',
+            local: '0,3 – 0,5 milijardi €',
+            land: 'oko 1 milijarda €',
+            electoral: '0,2 – 0,3 milijardi €'
+        },
+        
+        // Chart labels
+        chartLabels: [
+            'Javne nabavke (2–3 mlrd €)',
+            'Zemljište i koncesije (1 mlrd €)',
+            'Građevinske afere (0,5–1 mlrd €)',
+            'Lokalne afere (0,3–0,5 mlrd €)',
+            'Predizborni pokloni (0,2–0,3 mlrd €)'
+        ],
+        
+        // Controls
+        searchPlaceholder: '🔍 Pretražite afere po ključnim rečima...',
+        allCategories: 'Sve kategorije',
+        allYears: 'Sve godine',
+        showing: 'Prikazano:',
+        affairs: 'afera',
+        
+        // Categories
+        categories: {
+            'Urbanizam': 'Urbanizam',
+            'Zdravstvo': 'Zdravstvo',
+            'Izbori': 'Izbori',
+            'Finansije': 'Finansije',
+            'Mediji': 'Mediji',
+            'Ekologija': 'Ekologija',
+            'Saobraćaj': 'Saobraćaj',
+            'Obrazovanje': 'Obrazovanje',
+            'Privreda': 'Privreda',
+            'Lokalna vlast': 'Lokalna vlast',
+            'Protesti': 'Protesti',
+            'Energetika': 'Energetika',
+            'Politika': 'Politika',
+            'Parlament': 'Parlament',
+            'Ljudska prava': 'Ljudska prava',
+            'Tenderi': 'Tenderi',
+            'Ostalo': 'Ostalo'
+        },
+        
+        // Affair card
+        readMore: '📰 Opširnije',
+        comingSoon: '📰 Uskoro',
+        duplicate: '⚠️ DUPLIKAT',
+        
+        // Footer
+        footerText: 'Podaci prikupljeni iz javno dostupnih izvora. Aplikacija je kreirana u cilju transparentnosti i informisanja javnosti.',
+        
+        // No results
+        noResults: '😔 Nije pronađena nijedna afera koja odgovara vašim kriterijumima pretrage.'
+    },
+    
+    en: {
+        // Header
+        title: 'List of SNS Affairs (2012–2025)',
+        subtitle: 'Over 324 recorded or reported affairs and scandals',
+        warningTitle: '⚠️ Note on Human Lives:',
+        warningText: 'In addition to financial damage, it is estimated that many affairs have directly and indirectly led to loss of human lives through poor healthcare, unsafe construction work, neglected infrastructure, and migrations that forced people into risky situations.',
+        
+        // Damage Overview
+        damageTitle: '💰 Visual representation of estimated damage (up to 6 billion €)',
+        damageCategories: {
+            construction: 'Major construction affairs',
+            procurement: 'Public procurement',
+            local: 'Local "micro" affairs',
+            land: 'Land and concessions',
+            electoral: 'Pre-election gifts/votes'
+        },
+        damageAmounts: {
+            construction: '0.5 – 1.0 billion €',
+            procurement: '2 – 3 billion €',
+            local: '0.3 – 0.5 billion €',
+            land: 'approx. 1 billion €',
+            electoral: '0.2 – 0.3 billion €'
+        },
+        
+        // Chart labels
+        chartLabels: [
+            'Public procurement (2–3 bn €)',
+            'Land and concessions (1 bn €)',
+            'Construction affairs (0.5–1 bn €)',
+            'Local affairs (0.3–0.5 bn €)',
+            'Pre-election gifts (0.2–0.3 bn €)'
+        ],
+        
+        // Controls
+        searchPlaceholder: '🔍 Search affairs by keywords...',
+        allCategories: 'All categories',
+        allYears: 'All years',
+        showing: 'Showing:',
+        affairs: 'affairs',
+        
+        // Categories
+        categories: {
+            'Urbanizam': 'Urban Planning',
+            'Zdravstvo': 'Healthcare',
+            'Izbori': 'Elections',
+            'Finansije': 'Finance',
+            'Mediji': 'Media',
+            'Ekologija': 'Environment',
+            'Saobraćaj': 'Transportation',
+            'Obrazovanje': 'Education',
+            'Privreda': 'Economy',
+            'Lokalna vlast': 'Local Government',
+            'Protesti': 'Protests',
+            'Energetika': 'Energy',
+            'Politika': 'Politics',
+            'Parlament': 'Parliament',
+            'Ljudska prava': 'Human Rights',
+            'Tenderi': 'Tenders',
+            'Ostalo': 'Other'
+        },
+        
+        // Affair card
+        readMore: '📰 Read more',
+        comingSoon: '📰 Coming soon',
+        duplicate: '⚠️ DUPLICATE',
+        
+        // Footer
+        footerText: 'Data collected from publicly available sources. The application was created for transparency and public information.',
+        
+        // No results
+        noResults: '😔 No affairs found matching your search criteria.'
+    }
+};
+
+// Trenutni jezik (default: srpski)
+let currentLanguage = localStorage.getItem('language') || 'sr';
+
+// Funkcija za dobijanje prevoda
+function t(key) {
+    const keys = key.split('.');
+    let value = translations[currentLanguage];
+    
+    for (let k of keys) {
+        if (value && value[k]) {
+            value = value[k];
+        } else {
+            return key; // Vrati ključ ako prevod ne postoji
+        }
+    }
+    
+    return value;
+}
+
 // Bezbednosne funkcije - zaštita od XSS napada
 function escapeHtml(text) {
     const map = {
@@ -353,12 +524,94 @@ function sanitizeInput(input) {
 let searchTimeout = null;
 const SEARCH_DELAY = 300; // ms
 
+// Funkcija za promenu jezika
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    updateUILanguage();
+    renderAffairs(filteredAffairs);
+    updateAffairCount(filteredAffairs.length);
+    createDamageChart(); // Regeneriši chart sa novim jezikom
+    
+    // Ažuriraj dugmad za jezik
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById(`lang-${lang}`).classList.add('active');
+}
+
+// Funkcija za ažuriranje svih tekstova u UI-ju
+function updateUILanguage() {
+    // Header
+    document.querySelector('header h1').textContent = t('title');
+    document.querySelector('.subtitle').textContent = t('subtitle');
+    document.querySelector('.warning-box strong').textContent = t('warningTitle');
+    document.querySelector('.warning-box').childNodes[2].textContent = ' ' + t('warningText');
+    
+    // Damage Overview
+    document.querySelector('.damage-overview h2').textContent = t('damageTitle');
+    const damageCards = document.querySelectorAll('.damage-card');
+    const damageKeys = ['construction', 'procurement', 'local', 'land', 'electoral'];
+    damageCards.forEach((card, index) => {
+        const key = damageKeys[index];
+        card.querySelector('h3').textContent = t(`damageCategories.${key}`);
+        card.querySelector('.damage-amount').textContent = t(`damageAmounts.${key}`);
+    });
+    
+    // Search i filteri
+    document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+    document.querySelector('#categoryFilter option[value=""]').textContent = t('allCategories');
+    document.querySelector('#yearFilter option[value=""]').textContent = t('allYears');
+    
+    // Popuni kategorije
+    populateCategoryFilter();
+    
+    // Footer
+    document.querySelector('footer p').textContent = t('footerText');
+}
+
+// Popunjavanje filtera za kategorije sa prevodima
+function populateCategoryFilter() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const selectedValue = categoryFilter.value;
+    
+    // Sačuvaj sve opcije osim prve (Sve kategorije)
+    const options = Array.from(categoryFilter.options).slice(1);
+    
+    // Očisti sve osim prve opcije
+    while (categoryFilter.options.length > 1) {
+        categoryFilter.remove(1);
+    }
+    
+    // Dodaj opcije sa prevodima
+    options.forEach(option => {
+        const newOption = document.createElement('option');
+        newOption.value = option.value;
+        newOption.textContent = t(`categories.${option.value}`);
+        categoryFilter.appendChild(newOption);
+    });
+    
+    // Vrati selekciju
+    categoryFilter.value = selectedValue;
+}
+
 // Inicijalizacija
 document.addEventListener('DOMContentLoaded', function() {
+    updateUILanguage();
     createDamageChart();
     populateYearFilter();
     renderAffairs(affairs);
     updateAffairCount(affairs.length);
+    
+    // Postavi aktivni jezik
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById(`lang-${currentLanguage}`).classList.add('active');
+    
+    // Event listeners za jezike
+    document.getElementById('lang-sr').addEventListener('click', () => changeLanguage('sr'));
+    document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
     
     // Event listeners sa debouncing za pretragu
     document.getElementById('searchInput').addEventListener('input', function() {
@@ -377,17 +630,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Kreiranje grafikona
 function createDamageChart() {
-    const ctx = document.getElementById('damageChart').getContext('2d');
-    new Chart(ctx, {
+    const canvas = document.getElementById('damageChart');
+    const ctx = canvas.getContext('2d');
+    
+    // Uništi stari chart ako postoji
+    if (canvas.chart) {
+        canvas.chart.destroy();
+    }
+    
+    canvas.chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: [
-                'Javne nabavke (2–3 mlrd €)',
-                'Zemljište i koncesije (1 mlrd €)',
-                'Građevinske afere (0,5–1 mlrd €)',
-                'Lokalne afere (0,3–0,5 mlrd €)',
-                'Predizborni pokloni (0,2–0,3 mlrd €)'
-            ],
+            labels: t('chartLabels'),
             datasets: [{
                 data: [2.5, 1, 0.75, 0.4, 0.25],
                 backgroundColor: [
@@ -445,7 +699,7 @@ function renderAffairs(affairsToRender) {
     affairsList.innerHTML = '';
     
     if (affairsToRender.length === 0) {
-        affairsList.innerHTML = '<div class="no-results">😔 Nije pronađena nijedna afera koja odgovara vašim kriterijumima pretrage.</div>';
+        affairsList.innerHTML = `<div class="no-results">${t('noResults')}</div>`;
         return;
     }
     
@@ -460,11 +714,14 @@ function renderAffairs(affairsToRender) {
         const safeId = parseInt(affair.id); // Osiguraj da je ID broj
         
         // Svi linkovi prikazuju "Uskoro" - linkovi će biti ručno dodati kasnije
-        const linkButton = `<span class="affair-link no-link">📰 Uskoro</span>`;
+        const linkButton = `<span class="affair-link no-link">${t('comingSoon')}</span>`;
         
         const duplicateBadge = affair.isDuplicate 
-            ? '<span class="duplicate-badge">⚠️ DUPLIKAT</span>' 
+            ? `<span class="duplicate-badge">${t('duplicate')}</span>` 
             : '';
+        
+        // Prevedi kategoriju
+        const translatedCategory = t(`categories.${safeCategory}`);
         
         card.innerHTML = `
             <div class="affair-number">${safeId}</div>
@@ -472,7 +729,7 @@ function renderAffairs(affairsToRender) {
             <span class="affair-year">📅 ${safeYear}</span>
             ${duplicateBadge}
             <div>
-                <span class="affair-category">${safeCategory}</span>
+                <span class="affair-category">${translatedCategory}</span>
             </div>
             ${linkButton}
         `;
@@ -512,14 +769,6 @@ function filterAffairs() {
 
 // Ažuriranje brojača
 function updateAffairCount(count) {
-    let text = 'afera';
-    if (count === 1) {
-        text = 'afera';
-    } else if (count >= 2 && count <= 4) {
-        text = 'afere';
-    } else {
-        text = 'afera';
-    }
-    document.getElementById('affairCount').innerHTML = `Prikazano: <strong>${count}</strong> ${text}`;
+    document.getElementById('affairCount').innerHTML = `${t('showing')} <strong>${count}</strong> ${t('affairs')}`;
 }
 
