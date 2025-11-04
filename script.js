@@ -312,7 +312,17 @@ const affairs = [
     { id: 309, title: 'Renoviranje mesnih kancelarija bez nadzora', year: '2016', category: 'Infrastruktura', link: '', isDuplicate: false },
     { id: 310, title: 'Lažni ugovori za folklorna društva', year: '2015', category: 'Kultura', link: '', isDuplicate: false },
     { id: 311, title: 'Sumnjivo finansiranje lokalnih projekata', year: '2015', category: 'Lokalna vlast', link: '', isDuplicate: false },
-    { id: 312, title: 'Konjički klub Šumadija - oduzimanje zemljišta kneza Miloša Obrenovića', year: '2021', category: 'Lokalna vlast', link: '', isDuplicate: false }
+    { id: 312, title: 'Konjički klub Šumadija - oduzimanje zemljišta kneza Miloša Obrenovića', year: '2021', category: 'Lokalna vlast', link: '', isDuplicate: false },
+    { id: 313, title: 'Ostavka premijera Miloša Vučevića', year: '2025', category: 'Politika', link: '', isDuplicate: false },
+    { id: 314, title: 'Haos u Skupštini: dimne bombe i baklje', year: '2025', category: 'Parlament', link: '', isDuplicate: false },
+    { id: 315, title: '„Zvučni top" (LRAD) na protestima - sporna upotreba', year: '2025', category: 'Ljudska prava', link: '', isDuplicate: false },
+    { id: 316, title: 'Hapšenje Milorada Grčića (EPS) i drugih', year: '2025', category: 'Energetika', link: '', isDuplicate: false },
+    { id: 317, title: 'Očitavanje brojila: posao dobio T&M Group Solutions', year: '2025', category: 'Tenderi', link: '', isDuplicate: false },
+    { id: 318, title: 'NIS - američke sankcije', year: '2025', category: 'Energetika', link: '', isDuplicate: false },
+    { id: 319, title: 'Policijska brutalnost u Novom Sadu (5. septembar)', year: '2025', category: 'Protesti', link: '', isDuplicate: false },
+    { id: 320, title: 'Blokade RTS/RTV i medija', year: '2025', category: 'Mediji', link: '', isDuplicate: false },
+    { id: 321, title: 'Jadar ponovo aktiviran na nivou EU (CRMA)', year: '2025', category: 'Ekologija', link: '', isDuplicate: false },
+    { id: 322, title: 'Valjevo - prekomerna upotreba sile nad maloletnicima', year: '2025', category: 'Protesti', link: '', isDuplicate: false }
 ];
 
 let filteredAffairs = [...affairs];

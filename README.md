@@ -1,6 +1,6 @@
 # 📊 Spisak Afera SNS (2012-2025)
 
-Moderna web aplikacija koja prikazuje preko 310 zabeleženih ili prijavljenih afera i skandala povezanih sa SNS strankom i državnom upravom Srbije u periodu 2012–2025. godine.
+Moderna web aplikacija koja prikazuje preko 320 zabeleženih ili prijavljenih afera i skandala povezanih sa SNS strankom i državnom upravom Srbije u periodu 2012–2025. godine.
 
 ## 🎯 Karakteristike
 
@@ -134,9 +134,9 @@ Za pitanja, sugestije ili dopune, molimo kontaktirajte kroz GitHub Issues ili di
 
 ---
 
-**Verzija:** 2.0  
+**Verzija:** 2.1  
 **Poslednje ažuriranje:** 2025  
-**Broj afera:** 313 (uključujući duplikate)
+**Broj afera:** 323 (uključujući duplikate)
 
 ## 📱 Mobilna optimizacija
 
