@@ -7,7 +7,7 @@ const affairs = [
     { id: 4, title: 'Krušik — izvoz oružja', year: '2017', category: 'Oružje', link: 'https://insajder.net/sr/sajt/tema/14113/', isDuplicate: false },
     { id: 5, title: 'Jovanjica — plantaža marihuane', year: '2020', category: 'Zakon', link: 'https://www.bbc.com/serbian/lat/balkan-50295629', isDuplicate: false },
     { id: 6, title: 'Respiratori — sumnjive COVID-19 nabavke', year: '2020', category: 'Zdravstvo', link: 'https://www.bbc.com/serbian/lat/srbija-52532508', isDuplicate: false },
-    { id: 7, title: 'Linglong — eksploatacija radnika', year: '2021', category: 'Radništvo', link: 'https://www.bbc.com/serbian/articles/c72pvw3zry4o', isDuplicate: false },
+    { id: 7, title: 'Linglong — eksploatacija radnika', year: '2021', category: 'Ljudska prava', link: 'https://www.bbc.com/serbian/articles/c72pvw3zry4o', isDuplicate: false },
     { id: 8, title: 'Rio Tinto — rudarska koncesija', year: '2021', category: 'Ekologija', link: 'https://www.bbc.com/serbian/lat/balkan-59816906', isDuplicate: false },
     { id: 9, title: 'Energetski kolaps EPS', year: '2023', category: 'Energetika', link: '', isDuplicate: false },
     { id: 10, title: 'Bela tehnika — pokloni pred izbore', year: '2020', category: 'Izbori', link: 'https://www.bbc.com/serbian/lat/srbija-52834867', isDuplicate: false },
