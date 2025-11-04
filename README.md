@@ -159,7 +159,7 @@ Za pitanja, sugestije ili dopune, molimo kontaktirajte kroz GitHub Issues ili di
 
 **Verzija:** 3.0 (Security Enhanced)  
 **Poslednje ažuriranje:** Novembar 2025  
-**Broj afera:** 323 (uključujući duplikate)  
+**Broj afera:** 324 (uključujući duplikate)  
 **Bezbednost:** ⭐⭐⭐⭐⭐ A+ Rating
 
 ## 📱 Mobilna optimizacija

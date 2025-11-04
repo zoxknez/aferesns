@@ -322,7 +322,8 @@ const affairs = [
     { id: 319, title: 'Policijska brutalnost u Novom Sadu (5. septembar)', year: '2025', category: 'Protesti', link: '', isDuplicate: false },
     { id: 320, title: 'Blokade RTS/RTV i medija', year: '2025', category: 'Mediji', link: '', isDuplicate: false },
     { id: 321, title: 'Jadar ponovo aktiviran na nivou EU (CRMA)', year: '2025', category: 'Ekologija', link: '', isDuplicate: false },
-    { id: 322, title: 'Valjevo - prekomerna upotreba sile nad maloletnicima', year: '2025', category: 'Protesti', link: '', isDuplicate: false }
+    { id: 322, title: 'Valjevo - prekomerna upotreba sile nad maloletnicima', year: '2025', category: 'Protesti', link: '', isDuplicate: false },
+    { id: 323, title: 'Firma "Nites" (brat ministarke Darije Kisić) - 12,5 milijardi dinara od države', year: '2020-2023', category: 'Tenderi', link: 'https://nova.rs/vesti/biznis/firma-u-kojoj-je-angazovan-brat-ministarke-dobila-poslove-od-drzave-vredne-11-miliona-evra/', isDuplicate: false }
 ];
 
 let filteredAffairs = [...affairs];
