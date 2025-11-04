@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spisak Afera SNS (2012-2025)</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Spisak afera SNS (2012–2025)</h1>
+            <p class="subtitle">Preko 310 zabeleženih ili prijavljenih afera i skandala</p>
+            <div class="warning-box">
+                <strong>⚠️ Napomena o ljudskim životima:</strong> Pored novčane štete, procenjuje se da su mnoge afere direktno/indirektno dovele do gubitaka ljudskih života, kroz loše zdravstvo, nesigurne građevinske radove, zapuštenu infrastrukturu i migracije koje su naterale ljude u rizične situacije.
+            </div>
+        </header>
+
+        <!-- Vizuelni prikaz štete -->
+        <section class="damage-overview">
+            <h2>💰 Vizuelni prikaz štete (od maksimalno 6 milijardi €)</h2>
+            <div class="chart-container">
+                <canvas id="damageChart"></canvas>
+            </div>
+            <div class="damage-categories">
+                <div class="damage-card">
+                    <div class="damage-icon">🏗️</div>
+                    <h3>Velike građevinske afere</h3>
+                    <p class="damage-amount">0,5 – 1,0 milijardi €</p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">📋</div>
+                    <h3>Javne nabavke</h3>
+                    <p class="damage-amount">2 – 3 milijarde €</p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">🏘️</div>
+                    <h3>Lokalne "mikro" afere</h3>
+                    <p class="damage-amount">0,3 – 0,5 milijardi €</p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">🌍</div>
+                    <h3>Zemljište i koncesije</h3>
+                    <p class="damage-amount">oko 1 milijarda €</p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">🗳️</div>
+                    <h3>Predizborni pokloni/glasovi</h3>
+                    <p class="damage-amount">0,2 – 0,3 milijardi €</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontrole pretrage i filtera -->
+        <section class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Pretraži afere..." />
+            </div>
+            <div class="filter-box">
+                <select id="categoryFilter">
+                    <option value="">Sve kategorije</option>
+                    <option value="Urbanizam">Urbanizam</option>
+                    <option value="Zdravstvo">Zdravstvo</option>
+                    <option value="Izbori">Izbori</option>
+                    <option value="Finansije">Finansije</option>
+                    <option value="Mediji">Mediji</option>
+                    <option value="Ekologija">Ekologija</option>
+                    <option value="Saobraćaj">Saobraćaj</option>
+                    <option value="Obrazovanje">Obrazovanje</option>
+                    <option value="Privreda">Privreda</option>
+                    <option value="Lokalna vlast">Lokalna vlast</option>
+                    <option value="Ostalo">Ostalo</option>
+                </select>
+                <select id="yearFilter">
+                    <option value="">Sve godine</option>
+                </select>
+            </div>
+            <div class="stats">
+                <span id="affairCount">Ukupno: <strong>0</strong> afera</span>
+            </div>
+        </section>
+
+        <!-- Lista afera -->
+        <section class="affairs-list" id="affairsList">
+            <!-- Popunjava se JavaScript-om -->
+        </section>
+
+        <footer>
+            <p>Podaci prikupljeni iz javnih izvora. Aplikacija kreirana za transparentnost i javnost.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
