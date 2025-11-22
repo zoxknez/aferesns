@@ -431,6 +431,37 @@ footer {
     color: var(--text-light);
 }
 
+/* Checkbox Filter */
+.checkbox-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.checkbox-filter:hover {
+    border-color: var(--accent-color);
+}
+
+.checkbox-filter input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+
+.checkbox-filter label {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-color);
+    user-select: none;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -583,6 +614,11 @@ footer {
     .no-results {
         padding: 40px 20px;
         font-size: 1.1em;
+    }
+
+    .checkbox-filter {
+        padding: 12px 15px;
+        justify-content: center;
     }
 }
 

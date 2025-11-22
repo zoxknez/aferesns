@@ -323,29 +323,29 @@ const affairs = [
     { id: 320, title: 'Blokade RTS/RTV i medija', titleEn: 'RTS/RTV and media blockades', year: '2025', category: 'Mediji', link: '', isDuplicate: false },
     { id: 321, title: 'Jadar ponovo aktiviran na nivou EU (CRMA)', titleEn: 'Jadar reactivated at EU level (CRMA)', year: '2025', category: 'Ekologija', link: '', isDuplicate: false },
     { id: 322, title: 'Valjevo - prekomerna upotreba sile nad maloletnicima', titleEn: 'Valjevo - excessive use of force against minors', year: '2025', category: 'Protesti', link: '', isDuplicate: false },
-    { id: 323, title: 'Firma "Nites" (brat ministarke Darije Kisić) - 12,5 milijardi dinara od države', titleEn: 'Company "Nites" (Minister Darija Kisić\'s brother) - 12.5 billion dinars from the state', year: '2020-2023', category: 'Tenderi', link: 'https://nova.rs/vesti/biznis/firma-u-kojoj-je-angazovan-brat-ministarke-dobila-poslove-od-drzave-vredne-11-miliona-evra/', isDuplicate: false },
-    { id: 324, title: 'EXPO 2027 — Lex Specialis', titleEn: 'EXPO 2027 — Lex Specialis', year: '2024', category: 'Urbanizam', link: 'https://transparentnost.org.rs/', isDuplicate: false },
-    { id: 325, title: 'Generalštab — Džared Kušner', titleEn: 'General Staff — Jared Kushner Deal', year: '2024', category: 'Urbanizam', link: 'https://www.krik.rs/', isDuplicate: false },
-    { id: 326, title: 'Mala Krsna — seoba birača', titleEn: 'Mala Krsna — voter migration', year: '2024', category: 'Izbori', link: 'https://n1info.rs/', isDuplicate: false },
-    { id: 327, title: 'Oskar — Sky aplikacija', titleEn: 'Oskar — Sky app transcripts', year: '2024', category: 'Kriminal', link: 'https://www.krik.rs/', isDuplicate: false },
-    { id: 328, title: 'Rušenje Hotela Jugoslavija', titleEn: 'Hotel Jugoslavija demolition', year: '2024', category: 'Urbanizam', link: 'https://n1info.rs/', isDuplicate: false },
-    { id: 329, title: 'Banjska — oružani sukob', titleEn: 'Banjska — armed conflict', year: '2023', category: 'Bezbednost', link: 'https://birn.rs/', isDuplicate: false },
-    { id: 330, title: 'Ribnikar i Mladenovac — sistem nije zakazao', titleEn: 'Ribnikar & Mladenovac — system failure denial', year: '2023', category: 'Društvo', link: 'https://www.vreme.com/', isDuplicate: false },
-    { id: 331, title: 'EPS hakerski napad', titleEn: 'EPS ransomware attack', year: '2023', category: 'Energetika', link: 'https://www.slobodnaevropa.org/', isDuplicate: false },
-    { id: 332, title: 'Parizer kampanja', titleEn: 'Parizer campaign', year: '2023', category: 'Politika', link: 'https://www.danas.rs/', isDuplicate: false },
-    { id: 333, title: 'Doljevac — snimak nesreće', titleEn: 'Doljevac — missing crash footage', year: '2019', category: 'Pravosuđe', link: 'https://insajder.net/', isDuplicate: false },
-    { id: 334, title: 'Smrt Vladimira Cvijana', titleEn: 'Death of Vladimir Cvijan', year: '2018', category: 'Kriminal', link: 'https://n1info.rs/', isDuplicate: false },
-    { id: 335, title: 'Klan Veljka Belivuka — veze sa državom', titleEn: 'Belivuk Clan — state ties', year: '2021', category: 'Kriminal', link: 'https://www.krik.rs/', isDuplicate: false },
-    { id: 336, title: 'Telekom — Premijer liga (600 miliona evra)', titleEn: 'Telekom — Premier League (600M euros)', year: '2021', category: 'Mediji', link: 'https://n1info.rs/', isDuplicate: false },
-    { id: 337, title: 'Pirot — izlivanje amonijaka', titleEn: 'Pirot — ammonia leak', year: '2022', category: 'Ekologija', link: 'https://www.juznevesti.com/', isDuplicate: false },
-    { id: 338, title: 'Šapićeva vila — legalizacija', titleEn: 'Šapić\'s villa — legalization', year: '2022', category: 'Urbanizam', link: 'https://birn.rs/', isDuplicate: false },
-    { id: 339, title: 'Kentkart — nameštanje tendera', titleEn: 'Kentkart — tender fixing', year: '2023', category: 'Tenderi', link: 'https://birn.rs/', isDuplicate: false },
-    { id: 340, title: 'Asomakum — Andrej Vučić', titleEn: 'Asomakum — Andrej Vučić', year: '2014', category: 'Finansije', link: 'https://pescanik.net/', isDuplicate: false },
-    { id: 341, title: '24 stana u Bugarskoj — Siniša Mali', titleEn: '24 apartments in Bulgaria — Siniša Mali', year: '2015', category: 'Finansije', link: 'https://www.krik.rs/', isDuplicate: false },
-    { id: 342, title: 'Vetroparkovi — Continental Wind', titleEn: 'Wind farms — Continental Wind', year: '2015', category: 'Energetika', link: 'https://www.cins.rs/', isDuplicate: false },
-    { id: 343, title: 'Ubistvo Olivera Ivanovića', titleEn: 'Assassination of Oliver Ivanović', year: '2018', category: 'Politika', link: 'https://insajder.net/', isDuplicate: false },
-    { id: 344, title: 'Er Srbija — tajni ugovori sa Etihadom', titleEn: 'Air Serbia — secret Etihad contracts', year: '2013', category: 'Privreda', link: 'https://www.krik.rs/', isDuplicate: false },
-    { id: 345, title: 'Milenijum Tim — državni poslovi', titleEn: 'Millennium Team — state contracts', year: '2012-2025', category: 'Urbanizam', link: 'https://www.cins.rs/', isDuplicate: false }
+    { id: 323, title: 'Firma "Nites" (brat ministarke Darije Kisić) - 12,5 milijardi dinara od države', titleEn: 'Company "Nites" (Minister Darija Kisić\'s brother) - 12.5 billion dinars from the state', year: '2020-2023', category: 'Tenderi', link: 'https://nova.rs/vesti/biznis/firma-u-kojoj-je-angazovan-brat-ministarke-dobila-poslove-od-drzave-vredne-11-miliona-evra/', isDuplicate: false, isNew: true },
+    { id: 324, title: 'EXPO 2027 — Lex Specialis', titleEn: 'EXPO 2027 — Lex Specialis', year: '2024', category: 'Urbanizam', link: 'https://transparentnost.org.rs/', isDuplicate: false, isNew: true },
+    { id: 325, title: 'Generalštab — Džared Kušner', titleEn: 'General Staff — Jared Kushner Deal', year: '2024', category: 'Urbanizam', link: 'https://www.krik.rs/', isDuplicate: false, isNew: true },
+    { id: 326, title: 'Mala Krsna — seoba birača', titleEn: 'Mala Krsna — voter migration', year: '2024', category: 'Izbori', link: 'https://n1info.rs/', isDuplicate: false, isNew: true },
+    { id: 327, title: 'Oskar — Sky aplikacija', titleEn: 'Oskar — Sky app transcripts', year: '2024', category: 'Kriminal', link: 'https://www.krik.rs/', isDuplicate: false, isNew: true },
+    { id: 328, title: 'Rušenje Hotela Jugoslavija', titleEn: 'Hotel Jugoslavija demolition', year: '2024', category: 'Urbanizam', link: 'https://n1info.rs/', isDuplicate: false, isNew: true },
+    { id: 329, title: 'Banjska — oružani sukob', titleEn: 'Banjska — armed conflict', year: '2023', category: 'Bezbednost', link: 'https://birn.rs/', isDuplicate: false, isNew: true },
+    { id: 330, title: 'Ribnikar i Mladenovac — sistem nije zakazao', titleEn: 'Ribnikar & Mladenovac — system failure denial', year: '2023', category: 'Društvo', link: 'https://www.vreme.com/', isDuplicate: false, isNew: true },
+    { id: 331, title: 'EPS hakerski napad', titleEn: 'EPS ransomware attack', year: '2023', category: 'Energetika', link: 'https://www.slobodnaevropa.org/', isDuplicate: false, isNew: true },
+    { id: 332, title: 'Parizer kampanja', titleEn: 'Parizer campaign', year: '2023', category: 'Politika', link: 'https://www.danas.rs/', isDuplicate: false, isNew: true },
+    { id: 333, title: 'Doljevac — snimak nesreće', titleEn: 'Doljevac — missing crash footage', year: '2019', category: 'Pravosuđe', link: 'https://insajder.net/', isDuplicate: false, isNew: true },
+    { id: 334, title: 'Smrt Vladimira Cvijana', titleEn: 'Death of Vladimir Cvijan', year: '2018', category: 'Kriminal', link: 'https://n1info.rs/', isDuplicate: false, isNew: true },
+    { id: 335, title: 'Klan Veljka Belivuka — veze sa državom', titleEn: 'Belivuk Clan — state ties', year: '2021', category: 'Kriminal', link: 'https://www.krik.rs/', isDuplicate: false, isNew: true },
+    { id: 336, title: 'Telekom — Premijer liga (600 miliona evra)', titleEn: 'Telekom — Premier League (600M euros)', year: '2021', category: 'Mediji', link: 'https://n1info.rs/', isDuplicate: false, isNew: true },
+    { id: 337, title: 'Pirot — izlivanje amonijaka', titleEn: 'Pirot — ammonia leak', year: '2022', category: 'Ekologija', link: 'https://www.juznevesti.com/', isDuplicate: false, isNew: true },
+    { id: 338, title: 'Šapićeva vila — legalizacija', titleEn: 'Šapić\'s villa — legalization', year: '2022', category: 'Urbanizam', link: 'https://birn.rs/', isDuplicate: false, isNew: true },
+    { id: 339, title: 'Kentkart — nameštanje tendera', titleEn: 'Kentkart — tender fixing', year: '2023', category: 'Tenderi', link: 'https://birn.rs/', isDuplicate: false, isNew: true },
+    { id: 340, title: 'Asomakum — Andrej Vučić', titleEn: 'Asomakum — Andrej Vučić', year: '2014', category: 'Finansije', link: 'https://pescanik.net/', isDuplicate: false, isNew: true },
+    { id: 341, title: '24 stana u Bugarskoj — Siniša Mali', titleEn: '24 apartments in Bulgaria — Siniša Mali', year: '2015', category: 'Finansije', link: 'https://www.krik.rs/', isDuplicate: false, isNew: true },
+    { id: 342, title: 'Vetroparkovi — Continental Wind', titleEn: 'Wind farms — Continental Wind', year: '2015', category: 'Energetika', link: 'https://www.cins.rs/', isDuplicate: false, isNew: true },
+    { id: 343, title: 'Ubistvo Olivera Ivanovića', titleEn: 'Assassination of Oliver Ivanović', year: '2018', category: 'Politika', link: 'https://insajder.net/', isDuplicate: false, isNew: true },
+    { id: 344, title: 'Er Srbija — tajni ugovori sa Etihadom', titleEn: 'Air Serbia — secret Etihad contracts', year: '2013', category: 'Privreda', link: 'https://www.krik.rs/', isDuplicate: false, isNew: true },
+    { id: 345, title: 'Milenijum Tim — državni poslovi', titleEn: 'Millennium Team — state contracts', year: '2012-2025', category: 'Urbanizam', link: 'https://www.cins.rs/', isDuplicate: false, isNew: true }
 ];
 
 let filteredAffairs = [...affairs];
@@ -392,6 +392,7 @@ const translations = {
         searchPlaceholder: '🔍 Pretražite afere po ključnim rečima...',
         allCategories: 'Sve kategorije',
         allYears: 'Sve godine',
+        recentFilter: '🆕 Poslednje dodate',
         showing: 'Prikazano:',
         affairs: 'afera',
         tipTitle: 'Savet:',
@@ -494,6 +495,7 @@ const translations = {
         searchPlaceholder: '🔍 Search affairs by keywords...',
         allCategories: 'All categories',
         allYears: 'All years',
+        recentFilter: '🆕 Recently Added',
         showing: 'Showing:',
         affairs: 'affairs',
         tipTitle: 'Tip:',
@@ -642,6 +644,7 @@ function updateUILanguage() {
     document.getElementById('searchInput').placeholder = t('searchPlaceholder');
     document.querySelector('#categoryFilter option[value=""]').textContent = t('allCategories');
     document.querySelector('#yearFilter option[value=""]').textContent = t('allYears');
+    document.getElementById('recentFilterLabel').textContent = t('recentFilter');
     
     // Info tip
     document.getElementById('tipText').textContent = t('tipTitle');
@@ -712,6 +715,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.getElementById('categoryFilter').addEventListener('change', filterAffairs);
     document.getElementById('yearFilter').addEventListener('change', filterAffairs);
+    document.getElementById('recentFilter').addEventListener('change', filterAffairs);
     
     // Spreči slanje formi ako postoje (dodatna zaštita)
     document.addEventListener('submit', function(e) {
@@ -852,14 +856,16 @@ function filterAffairs() {
     
     const categoryFilter = document.getElementById('categoryFilter').value;
     const yearFilter = document.getElementById('yearFilter').value;
+    const recentFilter = document.getElementById('recentFilter').checked;
     
     filteredAffairs = affairs.filter(affair => {
         const affairTitle = (currentLanguage === 'en' && affair.titleEn) ? affair.titleEn : affair.title;
         const matchesSearch = affairTitle.toLowerCase().includes(sanitizedSearchTerm);
         const matchesCategory = !categoryFilter || affair.category === categoryFilter;
         const matchesYear = !yearFilter || affair.year.includes(yearFilter);
+        const matchesRecent = !recentFilter || affair.isNew;
         
-        return matchesSearch && matchesCategory && matchesYear;
+        return matchesSearch && matchesCategory && matchesYear && matchesRecent;
     });
     
     renderAffairs(filteredAffairs);
